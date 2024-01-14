@@ -1,0 +1,24 @@
+{
+  "name": "flare-tx-verifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "verify": "npx ts-node index",
+    "verifyEvmTxId": "npx ts-node ./scripts/verifyEvmTxId",
+    "test": "npx ts-node ./test/index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ethereumjs/tx": "^5.1.0",
+    "@ethereumjs/util": "^9.0.1",
+    "@flarenetwork/flarejs": "^1.2.1",
+    "bech32": "^2.0.0",
+    "ethers": "^6.9.0"
+  },
+  "devDependencies": {
+    "clipboardy": "^2.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
