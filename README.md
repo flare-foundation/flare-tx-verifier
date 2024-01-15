@@ -1,6 +1,6 @@
 # Flare: Transaction verification tool
 
-The repository contains a tool for verifying C-chain and P-chain transactions on Flare and Songbird networks, as well as on Coston and Coston2 test networks.
+The repository contains a tool for verifying transactions on Flare and Songbird networks (as well as on Coston and Coston2 test networks) before signing them.
 
 This tool addresses two main problems when signing transactions:
 1. The possibility that someone changed the transaction sent to the wallet without the user's knowledge.
