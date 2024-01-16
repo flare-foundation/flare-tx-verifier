@@ -1,10 +1,11 @@
 # Flare: Transaction verification tool
 
-The repository contains a tool for verification of transactions on Flare and Songbird networks, as well as on Coston and Coston2 test networks, prior to their signing.
+The repository contains a command line interface tool for verification of transactions on Flare and Songbird networks, as well as on Coston and Coston2 test networks, prior to their signing.
 
-This tool addresses two main problems when signing transactions:
-1. The possibility that someone changed the transaction sent to the wallet without the user's knowledge.
-2. The so-called blind signing (i.e., without seeing the content or parameters of the transaction).
+This tool mitigates the main challenges encountered during transaction signing:
+1. Unauthorized alterations to the transaction without user's knowledge before sending it to the wallet.
+2. The absence of visibility into the transaction's content or parameters during the signing process (i.e., blind signing).
+3. Uncertainty regarding the origin of the called contract, specifically whether it was published by Flare.
 
 ## Installation
 
@@ -17,7 +18,7 @@ npm install
 
 First, the site/dApp that creates transactions needs to show the user the unsigned transaction that was sent to the wallet (in hex encoding).
 
-The unsigned transaction (`txHex`) can be then checked with the verification tool by running:
+The unsigned transaction (`txHex`) can then be checked with the verification tool by running:
 ```
 npm run verify txHex
 ```
@@ -43,8 +44,8 @@ When staking, the returned staking parameters are the following:
 | Parameters | Description |
 | :----: | ----- | 
 | nodeId | Identifier of the validator node that you want to stake to. |
-| startTime | Proposed starting time of the stake. |
-| endTime | Proposed ending time of the stake. |
+| startTime | Proposed starting time of the stake (in local time). |
+| endTime | Proposed ending time of the stake (in local time). |
 | validatorFee | Proposed node fee in % (if you want to initialize staking on a validator node). |
 
 > [!IMPORTANT]
