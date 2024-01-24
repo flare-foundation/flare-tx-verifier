@@ -1,24 +1,33 @@
 {
-  "name": "flare-tx-verifier",
+  "name": "@flarenetwork/flare-tx-verifier",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "A CLI tool for verifying Flare C-chain and P-chain transactions.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/flare-foundation/flare-tx-verifier",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flare-foundation/flare-tx-verifier"
+  },
   "scripts": {
-    "verify": "npx ts-node index",
-    "verifyEvmTxId": "npx ts-node ./scripts/verifyEvmTxId",
-    "test": "npx ts-node ./test/index"
+    "verify": "npx ts-node ./src/index",
+    "test": "npx ts-node ./test/index",
+    "build": "tsup"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@ethereumjs/tx": "^5.1.0",
-    "@ethereumjs/util": "^9.0.1",
-    "@flarenetwork/flarejs": "^1.2.1",
-    "bech32": "^2.0.0",
-    "ethers": "^6.9.0"
+    "@flarenetwork/flare-tx-verifier-lib": "^1.0.0",
+    "web3-utils": "^4.1.1"
   },
   "devDependencies": {
     "clipboardy": "^2.3.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
   }
 }

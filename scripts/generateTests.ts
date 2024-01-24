@@ -1,4 +1,4 @@
-import { verify } from "../src"
+import { verify } from "@flarenetwork/flare-tx-verifier-lib"
 import fs from "fs"
 
 const TXS_PATH = "test/txs.json"

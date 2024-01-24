@@ -54,15 +54,6 @@ When staking, the returned staking parameters are the following:
 > 2. For **C-chain transactions** (transferring funds and contract calls) check if the wallet shows the same network, recipients, value and contractData as the verification tool.
 > 3. For **P-chain transactions** (importing/exporting funds and staking) check if the hash you are signing matches the `messageToSign` value (note that some hashes do not include the starting `0x`; this is OK).
 
-## Usage in other tools
-
-If you want to use the verification tool in other applications, use asynchronous function `verify` that resolves to a [`TxVerification`](src/interface.ts) object or `null`:
-```
-import { verify } from "./src"
-
-let verification = await verify(txHex)
-```
-
 ## Further options
 
 For continuous reading from the clipboard (i.e., automatic parsing of copied text), use:
@@ -73,9 +64,4 @@ npm run verify
 To see some examples, use:
 ```
 npm run test
-```
-
-For verifying an already validated EVM transaction from the blockchain, take its transaction hash (`txHash`) and use the following statement to decode the data:
-```
-npm run verifyEvmTxId txHash
 ```

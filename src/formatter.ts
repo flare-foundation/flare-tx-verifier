@@ -1,6 +1,5 @@
-import { TxVerification, TxVerificationParameter } from "./src/interface"
-import * as txtype from "./src/txtype"
-import { ethers } from "ethers"
+import { TxVerification, TxVerificationParameter } from "@flarenetwork/flare-tx-verifier-lib"
+import { fromWei } from "web3-utils"
 
 export function displayVerification(verification: TxVerification) {
     let property: keyof typeof verification
@@ -18,7 +17,7 @@ export function displayVerification(verification: TxVerification) {
             for (let item of items) {
                 if (item.value !== undefined) {
                     let param = ""
-                    if ([txtype.ADD_DELEGATOR_P, txtype.ADD_VALIDATOR_P].includes(verification.type) && ["startTime", "endTime"].includes(item.name)) {
+                    if (["addDelegatorP", "addValidatorP"].includes(verification.type) && ["startTime", "endTime"].includes(item.name)) {
                         param = new Date(parseInt(item.value) * 1e3).toLocaleString()
                     } else {
                         param = JSON.stringify(item.value, undefined, "  ")
@@ -36,7 +35,7 @@ export function displayVerification(verification: TxVerification) {
 }
 
 function weiToFlr(wei: string): string {
-    let flr = ethers.formatEther(wei)
+    let flr = fromWei(wei, "ether")
     let parts = flr.split(".")
     return `${parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${parts.length > 1 && parts[1] ? "." + parts[1] : ""} FLR`
 }
