@@ -1,6 +1,6 @@
 {
   "name": "@flarenetwork/flare-tx-verifier",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool for verifying Flare C-chain and P-chain transactions.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
