@@ -9,14 +9,14 @@ This tool mitigates the main challenges encountered during transaction signing:
 
 ## Installation
 
-Install node.js, go to the directory where the tool is located and run (using administrative rights):
+Install node.js and run (using administrative rights):
 ```
-npm install
+npm install @flarenetwork/flare-tx-verifier
 ```
 
 ## Verification process
 
-First, the site/dApp that creates transactions needs to show the user the unsigned transaction that was sent to the wallet (in hex encoding).
+First, the site/dApp needs to show the user the unsigned transaction that was sent to the wallet (in hex encoding).
 
 The unsigned transaction (`txHex`) can then be checked with the verification tool by running:
 ```
