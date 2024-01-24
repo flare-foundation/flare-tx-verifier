@@ -9,7 +9,7 @@ This tool mitigates the main challenges encountered during transaction signing:
 
 ## Installation
 
-Install node.js and run (using administrative rights):
+Install node.js and run
 ```
 npm install @flarenetwork/flare-tx-verifier
 ```
