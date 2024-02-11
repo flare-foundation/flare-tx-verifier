@@ -14,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "strictFunctionTypes": true,
     "esModuleInterop": true,
-    "typeRoots": ["dist/**", "./node_modules/@types"]
+    "typeRoots": ["./dist/**", "./node_modules/@types"]
   },
   "exclude": ["node_modules", "dist"],
   "typeAcquisition": {
