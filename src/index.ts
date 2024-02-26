@@ -36,7 +36,7 @@ async function main() {
             text = txHex
         }
     } else {
-        let txHex = process.argv[2].trim().toLowerCase()
+        let txHex = process.argv[2].trim()
         let verification = await verify(txHex)
         if (verification == null) {
             console.log("Transaction verification did not succeed")

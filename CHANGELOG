@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.6] - 2024-02-23
+
+### Changed
+
+- Updated lib version that allows more general inputs.
+
 ## [1.0.5] - 2024-02-11
 
 ### Added

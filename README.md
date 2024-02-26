@@ -16,16 +16,18 @@ npm install
 
 ## Verification process
 
-First, the site/dApp needs to show the user the unsigned transaction that was sent to the wallet (in hex encoding).
+First, the site/dApp needs to show the user a (zipped) unsigned transaction that was sent to the wallet (in base64 or hex encoding).
 
-The unsigned transaction (`txHex`) can then be checked with the verification tool by running:
+The unsigned transaction (`input`) can then be checked with the verification tool by running:
 ```
-npx @flarenetwork/flare-tx-verifier txHex
+npx @flarenetwork/flare-tx-verifier input
 ```
 or (if you cloned the repository)
 ```
-npm run verify txHex
+npm run verify input
 ```
+Alernatively, the above commands can be used without `input`. The input is then being continuously read from the clipboard.
+
 The output will include the following parameters (depending on the type of transaction):
 
 | Output parameter | Description |
