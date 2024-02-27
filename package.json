@@ -15,7 +15,7 @@
   },
   "scripts": {
     "verify": "npx ts-node ./src/index",
-    "build": "rm -rf dist/ && npx tsc -b && sed -i '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js"
+    "build": "rm -rf dist/ && npx tsc -b && sed -i'' -e '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js"
   },
   "author": "",
   "license": "MIT",
