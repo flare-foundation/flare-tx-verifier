@@ -1,6 +1,6 @@
 {
   "name": "@flarenetwork/flare-tx-verifier",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A CLI tool for verifying Flare C-chain and P-chain transactions.",
   "main": "dist/index.js",
   "files": [
@@ -15,12 +15,12 @@
   },
   "scripts": {
     "verify": "npx ts-node ./src/index",
-    "build": "rm -rf dist/ && npx tsc -b && sed -i '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js"
+    "build": "rm -rf dist/ && npx tsc -b && sed -i'' -e '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@flarenetwork/flare-tx-verifier-lib": "^1.0.5",
+    "@flarenetwork/flare-tx-verifier-lib": "^1.0.6",
     "clipboardy": "^2.3.0",
     "web3-utils": "^4.1.1"
   },
