@@ -26,7 +26,7 @@ or (if you cloned the repository)
 ```
 npm run verify input
 ```
-Alernatively, the above commands can be used without `input`. The input is then being continuously read from the clipboard.
+Alternatively, the above commands can be used without `input`. The input is then being continuously read from the clipboard.
 
 The output will include the following parameters (depending on the type of transaction):
 
