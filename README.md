@@ -39,7 +39,8 @@ The output will include the following parameters (depending on the type of trans
 | values      				    | Amount of funds transferred or staked. |
 | fee         				    | Transfer fee stated (if specified in transaction before sending it to the wallet).  |              
 | contractName      		  | When calling a contract, its name will be returned (if it exists).  |               	
-| contractMethod   			  | When calling a contract, the method called will be returned (if it can be decoded). |                  
+| contractMethod   			  | When calling a contract, the method called will be returned (if it can be decoded). |
+| contractMethodABI   			  | When calling a C-chain contract, the ABI specification of the method called will be returned in JSON string format. |
 | contractData      		  | When calling a contract, the data field is returned (in hex format). |
 | isFlareNetworkContract 	| When calling a contract, it returns true/false, depending on the contract being deployed by Flare. |
 | parameters				      | When calling a contract, the method's parameters are returned. For types "addDelegatorP" and "addValidatorP", additional staking parameters are returned. |
