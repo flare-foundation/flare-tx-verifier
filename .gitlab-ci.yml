@@ -1,0 +1,52 @@
+variables:
+  PATTERN_FULL: '^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-(?:(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?:[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
+  PATTERN_SEMI: '^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$'
+  AUTH_TOKEN: $NPM_AUTH_TOKEN
+
+.check-tag_template:
+  script:
+    - result=$(grep -Pc "$PATTERN_FULL" <<< $CI_COMMIT_TAG) || true
+    - if [ $result -eq 0 ]; then echo "Tag has wrong format"; exit 1; fi #TODO: link to spec
+
+.compare-versions_template:
+  script:
+    - apt-get update
+    - apt-get install jq -y
+    - pver=$(echo "v$(jq -r .version package.json)")
+    - if [ $pver != $CI_COMMIT_TAG ]; then echo "Tag and package.json versions do not match"; exit 1; fi;
+
+.publish-npm_template:
+  image: node:20
+  script:
+    - apt-get update
+    - apt-get install -y gettext
+    - envsubst <<< '//registry.npmjs.org/:_authToken=$AUTH_TOKEN' > .npmrc
+    - result=$(grep -Pc "$PATTERN_SEMI" <<< "$CI_COMMIT_TAG") || true
+    - npm ci
+    - npm run build
+    - if [ $result -eq 1 ]; then npm publish; else npm publish --tag beta; fi;
+
+stages:
+  - publish
+
+check-tag:
+  stage: publish
+  extends: .check-tag_template
+  rules:
+    - if: '$CI_COMMIT_TAG'
+
+compare-versions:
+  stage: publish
+  extends: .compare-versions_template
+  needs:
+    - job: check-tag
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  
+publish-npm:
+  stage: publish
+  extends: .publish-npm_template
+  needs:
+    - job: compare-versions
+  rules:
+    - if: '$CI_COMMIT_TAG'
