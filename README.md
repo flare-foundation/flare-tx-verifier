@@ -33,8 +33,8 @@ The output will include the following parameters (depending on the type of trans
 | Output parameter | Description |
 | :----: | ----- | 
 | network 					      | Network name, e.g. Flare Mainnet. For non-flare networks, chainID is returned. |
-| type 						        | Possible transaction types are "transferC", "contractCallC", "exportC", "importC", "exportP", "importP", "addDelegatorP", "addValidatorP" |
-| description 				    | Description of the transaction type: "Funds transfer on C-chain", "Contract call on C-chain", "Export from C-chain", "Import to C-chain", "Export from P-chain", "Import to P-chain", "Stake on P-chain", "Add validator on P-chain". |                 
+| type 						        | Possible transaction types are "transferC", "contractCallC", "exportC", "importC", "exportP", "importP", "transferP", "addDelegatorP", "addValidatorP" |
+| description 				    | Description of the transaction type: "Funds transfer on C-chain", "Contract call on C-chain", "Export from C-chain", "Import to C-chain", "Export from P-chain", "Import to P-chain", "Funds transfer on P-chain", "Stake on P-chain", "Add validator on P-chain". |
 | recipients  				    | Recipient of funds or the address of the contract called. |
 | values      				    | Amount of funds transferred or staked. |
 | fee         				    | Transfer fee stated (if specified in transaction before sending it to the wallet).  |              
