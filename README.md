@@ -35,16 +35,17 @@ The output will include the following parameters (depending on the type of trans
 | network 					      | Network name, e.g. Flare Mainnet. For non-flare networks, chainID is returned. |
 | type 						        | Possible transaction types are "transferC", "contractCallC", "exportC", "importC", "exportP", "importP", "transferP", "addDelegatorP", "addValidatorP" |
 | description 				    | Description of the transaction type: "Funds transfer on C-chain", "Contract call on C-chain", "Export from C-chain", "Import to C-chain", "Export from P-chain", "Import to P-chain", "Funds transfer on P-chain", "Stake on P-chain", "Add validator on P-chain". |
-| recipients  				    | Recipient of funds or the address of the contract called. |
+| recipients  				    | Recipient(s) of funds or the address of the contract called. |
 | values      				    | Amount of funds transferred or staked. |
 | fee         				    | Transfer fee stated (if specified in transaction before sending it to the wallet).  |              
-| contractName      		  | When calling a contract, its name will be returned (if it exists).  |               	
-| contractMethod   			  | When calling a contract, the method called will be returned (if it can be decoded). |
+| contractName      		  | When calling a C-chain contract, its name will be returned (if it exists).  |               	
+| contractMethod   			  | When calling a C-chain contract, the method called will be returned (if it can be decoded). |
 | contractMethodABI   			  | When calling a C-chain contract, the ABI specification of the method called will be returned in JSON string format. |
-| contractData      		  | When calling a contract, the data field is returned (in hex format). |
-| isFlareNetworkContract 	| When calling a contract, it returns true/false, depending on the contract being deployed by Flare. |
-| parameters				      | When calling a contract, the method's parameters are returned. For types "addDelegatorP" and "addValidatorP", additional staking parameters are returned. |
-| warnings					      | Warnings are returned for suspicious data (e.g., "Not official Flare contract"). |
+| contractData      		  | When calling a C-chain contract, the data field is returned (in hex format). |
+| isFlareNetworkContract 	| When calling a C-chain contract, it returns true/false, depending if the contract was deployed by Flare. |
+| parameters				      | When calling a C-chain contract, the method's parameters are returned. For types "addDelegatorP" and "addValidatorP", additional staking parameters are returned. |
+| safeTxData                | When calling a C-chain contract to execute a safe transaction (i.e., a transaction that is initiated from a Safe smart account), an object containing the decoded data of the safe transaction is returned. If the safe transaction is a contract call, the object contains the following properties (described above): contractName, contractMethod, contractMethodABI, isFlareNetworkContract, parameters. |
+| warnings					      | Warnings are returned for suspicious data (e.g., "Funds will be locked after transfer."). |
 | messageToSign	  			  | Hash sent to the wallet to sign. Useful for confirming P-chain transactions. |
 
 When staking, the returned staking parameters are the following:
