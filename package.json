@@ -14,8 +14,15 @@
     "url": "https://github.com/flare-foundation/flare-tx-verifier"
   },
   "scripts": {
-    "verify": "npx ts-node ./src/index",
-    "build": "rm -rf dist/ && npx tsc -b && sed -i'' -e '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js"
+    "verify": "ts-node ./src/index",
+    "build": "rm -rf dist/ && tsc -b && sed -i'' -e '1s;^;#!/usr/bin/env node\\n;' ./dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint:check": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format:check": "biome format .",
+    "format:fix": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write ."
   },
   "author": "",
   "license": "MIT",
@@ -25,7 +32,10 @@
     "web3-utils": "^4.3.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.9",
+    "@types/node": "^24.13.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

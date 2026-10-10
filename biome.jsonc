@@ -1,0 +1,42 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
+  "files": {
+    "includes": ["src/**/*.ts"]
+  },
+  // Mirrors @flarenetwork/prettier-config-flare (the org's shared prettier preset).
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "always"
+    }
+  },
+  "assist": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "complexity": {
+        // The codebase's core pattern: static-only classes (Utils, Amount, Constants,
+        // etc.) used as namespaces, with static methods calling sibling statics via
+        // `this` so subclasses can override them polymorphically. Both are deliberate,
+        // not incidental, across dozens of sites.
+        "noStaticOnlyClass": "off",
+        "noThisInStatic": "off"
+      },
+      "suspicious": {
+        // The Ledger/Trezor hardware-wallet SDKs are loosely typed (any-heavy), so
+        // this fires on third-party surface, not on real bugs in our code.
+        "noExplicitAny": "off"
+      }
+    }
+  }
+}

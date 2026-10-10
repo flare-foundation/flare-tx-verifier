@@ -1,60 +1,20 @@
-include:
-  - component: $CI_SERVER_FQDN/flarenetwork/infra-public/ci-components/dependency-track@~latest
-
-variables:
-  PATTERN_FULL: '^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-(?:(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?:[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
-  PATTERN_SEMI: '^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$'
-  NODE_VERSION: "24.13.0"
-
-.check-tag_template:
-  script:
-    - result=$(grep -Pc "$PATTERN_FULL" <<< $CI_COMMIT_TAG) || true
-    - if [ $result -eq 0 ]; then echo "Tag has wrong format"; exit 1; fi #TODO: link to spec
-
-.compare-versions_template:
-  script:
-    - apt-get update
-    - apt-get install jq -y
-    - pver=$(echo "v$(jq -r .version package.json)")
-    - if [ $pver != $CI_COMMIT_TAG ]; then echo "Tag and package.json versions do not match"; exit 1; fi;
-
-.publish-npm_template:
-  image: node:$NODE_VERSION
-  id_tokens:
-    NPM_ID_TOKEN:
-      aud: "npm:registry.npmjs.org"
-    SIGSTORE_ID_TOKEN:
-      aud: sigstore
-  script:
-    - apt-get update
-    - apt-get install -y gettext
-    - result=$(grep -Pc "$PATTERN_SEMI" <<< "$CI_COMMIT_TAG") || true
-    - npm ci
-    - npm run build
-    - if [ $result -eq 1 ]; then npm publish; else npm publish --tag beta; fi;
-
 stages:
-  - publish
+  - test
   - sbom
 
-check-tag:
-  stage: publish
-  extends: .check-tag_template
-  rules:
-    - if: '$CI_COMMIT_TAG'
+default:
+  tags:
+    - flarenetwork
+  artifacts:
+    expire_in: 3 days
 
-compare-versions:
-  stage: publish
-  extends: .compare-versions_template
-  needs:
-    - job: check-tag
-  rules:
-    - if: '$CI_COMMIT_TAG'
-  
-publish-npm:
-  stage: publish
-  extends: .publish-npm_template
-  needs:
-    - job: compare-versions
-  rules:
-    - if: '$CI_COMMIT_TAG'
+include:
+  - component: gitlab.com/flarenetwork/ci-components-private/lgtm@2
+  - component: gitlab.com/flarenetwork/ci-components-private/dependency-track@2
+  - template: Jobs/Secret-Detection.latest.gitlab-ci.yml
+  - component: gitlab.com/flarenetwork/ci-components-private/lint-pnpm@2
+    inputs:
+      node_version: "24.19"
+      lint_commands: |
+        pnpm check
+        pnpm typecheck

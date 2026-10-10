@@ -1,0 +1,43 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version-file: ".nvmrc"
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320
+        with:
+          cache: "true"
+      - run: pnpm install --frozen-lockfile
+      - name: Verify package contents
+        run: |
+          pnpm build
+          test -f dist/index.js
+          pnpm pack
+          tar -xzf flarenetwork-flare-tx-verifier-*.tgz
+          test -f package/dist/index.js
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for provenance
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version-file: ".nvmrc"
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320
+        with:
+          cache: "true"
+      - uses: flare-foundation/npm-release-action@ac21bff727b4b3477924347a8c38b16797df308f
+        with:
+          build_script: "build"
